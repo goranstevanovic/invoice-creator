@@ -9,5 +9,107 @@
     <script src="app.js" defer></script>
     <title>Invoice Creator</title>
   </head>
-  <body></body>
+  <body>
+    <header class="invoice-head">
+      <h1 class="invoice-head__title">Invoice</h1>
+      <h2 class="invoice-head__number" contenteditable="true">#123456</h2>
+      <section class="invoice-head__dates">
+        <p class="invoice-head__date">
+          Date:
+          <input
+            class="invoice-head__date-picker"
+            type="date"
+            value="2022-09-15"
+          />
+        </p>
+        <p class="invoice-head__date">
+          Due Date:
+          <input
+            class="invoice-head__date-picker"
+            type="date"
+            value="2022-09-30"
+          />
+        </p>
+      </section>
+      <section class="invoice-head__addresses">
+        <section class="invoice-head__address-wrapper">
+          <p class="invoice-head__address-label">From:</p>
+          <p class="invoice-head__address-text" contenteditable="true">
+            Name or Company<br />
+            123 Streen Name<br />
+            City, 12345 ST<br />
+            Country
+          </p>
+        </section>
+        <section class="invoice-head__address-wrapper">
+          <p class="invoice-head__address-label">To:</p>
+          <p class="invoice-head__address-text" contenteditable="true">
+            Name or Company<br />
+            123 Streen Name<br />
+            City, 12345 ST<br />
+            Country
+          </p>
+        </section>
+      </section>
+    </header>
+
+    <main class="invoice-body">
+      <table class="invoice-items">
+        <thead>
+          <tr>
+            <th>Invoice Item</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Amount</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td contenteditable="true">Item Name</td>
+            <td contenteditable="true">1</td>
+            <td contenteditable="true">100.00</td>
+            <td>100.00</td>
+            <td><button>remove</button></td>
+          </tr>
+          <tr>
+            <td contenteditable="true">Item Name with a Longer Name</td>
+            <td contenteditable="true">10</td>
+            <td contenteditable="true">2,000.00</td>
+            <td>20,000.00</td>
+            <td><button>remove</button></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <button class="add-item">Add Item</button>
+
+      <table class="invoice-summary">
+        <thead>
+          <tr>
+            <th>Invoice Summary</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Subtotal</td>
+            <td>20,100.00</td>
+          </tr>
+          <tr>
+            <td>Tax <span contenteditable="true">10%</span></td>
+            <td>2,010.00</td>
+          </tr>
+          <tr>
+            <td>Shipping</td>
+            <td contenteditable="true">140.00</td>
+          </tr>
+          <tr>
+            <td>Total</td>
+            <td>22,250.00</td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+  </body>
 </html>
