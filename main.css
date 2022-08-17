@@ -36,7 +36,7 @@ body {
 .container--invoice-head {
   align-items: center;
   display: grid;
-  gap: 1rem;
+  gap: 2rem 4rem;
   grid-template-columns: repeat(4, 1fr);
   grid-template-areas:
     'title number dates dates'
@@ -63,6 +63,14 @@ body {
   font-weight: 400;
   grid-area: number;
   margin: 0;
+}
+
+.invoice-head__number-input {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font: inherit;
+  width: 90%;
 }
 
 .invoice-head__dates {
@@ -105,8 +113,17 @@ body {
 }
 
 .invoice-head__address-text {
+  background: transparent;
+  border: none;
+  color: #fff;
   font-size: 1rem;
+  height: min-content;
   line-height: 1.5;
+  max-height: 13em;
+  min-height: 8em;
+  overflow-x: auto;
+  resize: vertical;
+  width: 100%;
 }
 
 .invoice-body {
@@ -219,4 +236,17 @@ body {
   background-color: var(--dark);
   color: #fff;
   line-height: 1em;
+}
+
+.editable {
+  border-bottom-style: dashed;
+  border-bottom-width: 1px;
+}
+
+.editable--dark {
+  border-color: var(--dark);
+}
+
+.editable--light {
+  border-color: #fff;
 }
