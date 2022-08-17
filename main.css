@@ -173,6 +173,14 @@ body {
   line-height: 1.5;
 }
 
+.invoice-item__input {
+  background: transparent;
+  border-bottom: 1px dashed var(--dark);
+  border: none;
+  text-align: center;
+  width: 100%;
+}
+
 .invoice-item__description {
   text-align: left;
   width: 46%;

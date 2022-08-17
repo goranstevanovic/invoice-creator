@@ -101,7 +101,7 @@ Country
             <th>&nbsp;</th>
           </tr>
         </thead>
-        <tbody class="invoice-items__body">
+        <tbody id="invoice-items__body" class="invoice-items__body">
           <tr class="invoice-item__row">
             <td class="invoice-item__description">Item Name</td>
             <td class="invoice-item__quantity">1</td>
@@ -118,26 +118,41 @@ Country
               </button>
             </td>
           </tr>
-          <tr>
-            <td class="invoice-item__description">Item wih a Longer Name</td>
-            <td class="invoice-item__quantity">10</td>
-            <td class="invoice-item__price">2,000.00</td>
-            <td class="invoice-item__amount">20,000.00</td>
-            <td class="invoice-item__edit">
-              <button class="invoice-item__button">
-                <i class="fa-regular fa-pen-to-square"></i>
-              </button>
+          <tr id="form-row">
+            <td class="invoice-item__description">
+              <input
+                id="invoice-item__description"
+                class="invoice-item__input"
+                type="text"
+                placeholder="Item Description"
+              />
             </td>
-            <td class="invoice-item__remove">
-              <button class="invoice-item__button">
-                <i class="fa-regular fa-square-minus"></i>
-              </button>
+            <td class="invoice-item__quantity">
+              <input
+                id="invoice-item__quantity"
+                class="invoice-item__input"
+                type="number"
+                placeholder="1"
+                min="1"
+              />
             </td>
+            <td class="invoice-item__price">
+              <input
+                id="invoice-item__price"
+                class="invoice-item__input"
+                type="number"
+                placeholder="100.00"
+                min="0.01"
+              />
+            </td>
+            <td class="invoice-item__amount"></td>
+            <td class="invoice-item__edit"></td>
+            <td class="invoice-item__remove"></td>
           </tr>
         </tbody>
       </table>
 
-      <button class="add-item">Add Item</button>
+      <button id="add-item-btn" class="add-item">Add Item</button>
 
       <table class="invoice-summary">
         <thead>
