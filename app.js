@@ -28,6 +28,12 @@ const model = {
   updateSubtotal(amount) {
     this.invoiceSubtotal += amount;
   },
+
+  updateTotal() {
+    const taxAmount = (this.invoiceSubtotal * this.invoiceTaxRate) / 100;
+    this.invoiceTotal =
+      this.invoiceSubtotal + taxAmount + this.invoiceShippingCost;
+  },
 };
 
 const view = {
@@ -40,6 +46,7 @@ const view = {
   taxRateInput: document.getElementById('tax-rate-input'),
   taxRateAmount: document.getElementById('invoice-summary__tax-amount'),
   shippingCostInput: document.getElementById('shipping-cost-input'),
+  totalInvoiceAmount: document.getElementById('invoice-summary__total-amount'),
 
   addTableRow(data) {
     const tableRow = document.createElement('tr');
@@ -84,6 +91,10 @@ const view = {
   updateSubtotal(amount) {
     document.getElementById('invoice-summary__subtotal').textContent =
       utils.formatNumberDisplay(amount);
+  },
+
+  updateTotal(amount) {
+    this.totalInvoiceAmount.textContent = utils.formatNumberDisplay(amount);
   },
 
   clearForm() {
@@ -149,8 +160,10 @@ const controller = {
 
     model.saveItem(itemData);
     model.updateSubtotal(itemData.quantity * itemData.price);
+    model.updateTotal();
     view.addTableRow(itemData);
     view.updateSubtotal(model.invoiceSubtotal);
+    view.updateTotal(model.invoiceTotal);
     view.clearForm();
   },
 
@@ -167,17 +180,23 @@ const controller = {
     model.removeItem(id);
     view.deleteTableRow(id);
     model.updateSubtotal(-selectedItem.amount);
+    model.updateTotal();
     view.updateSubtotal(model.invoiceSubtotal);
+    view.updateTotal(model.invoiceTotal);
   },
 
   handleTaxRateChange(e) {
     model.updateTaxRate(Number(e.target.value));
     view.updateTaxRate((model.invoiceSubtotal * model.invoiceTaxRate) / 100);
+    model.updateTotal();
+    view.updateTotal(model.invoiceTotal);
   },
 
   handleShippingCostChange(e) {
     const shippingCost = Number(e.target.value);
     model.updateShippingCost(shippingCost);
+    model.updateTotal();
+    view.updateTotal(model.invoiceTotal);
   },
 };
 
@@ -198,5 +217,5 @@ view.taxRateInput.addEventListener(
 
 view.shippingCostInput.addEventListener(
   'change',
-  controller.handleShippingCostChange
+  controller.handleShippingCostChange.bind(controller)
 );
