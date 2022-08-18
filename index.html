@@ -190,7 +190,17 @@ Country
           </tr>
           <tr>
             <td class="invoice-summary__description">Shipping</td>
-            <td class="invoice-summary__amount">140.00</td>
+            <td class="invoice-summary__amount">
+              <input
+                id="shipping-cost-input"
+                class="invoice-summary__shipping-cost editable editable--dark"
+                type="number"
+                step="0.01"
+                min="0"
+                max="1000000.00"
+                value="0.00"
+              />
+            </td>
           </tr>
           <tr class="invoice-summary__total">
             <td class="invoice-summary__description">Total</td>

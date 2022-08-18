@@ -4,6 +4,7 @@ const model = {
   invoiceItems: [],
   invoiceSubtotal: 0,
   invoiceTaxRate: 0,
+  invoiceShippingCost: 0,
   invoiceTotal: 0,
 
   saveItem(data) {
@@ -20,6 +21,10 @@ const model = {
     this.invoiceTaxRate = rate;
   },
 
+  updateShippingCost(amount) {
+    this.invoiceShippingCost = amount;
+  },
+
   updateSubtotal(amount) {
     this.invoiceSubtotal += amount;
   },
@@ -34,6 +39,7 @@ const view = {
   addItemBtn: document.getElementById('add-item-btn'),
   taxRateInput: document.getElementById('tax-rate-input'),
   taxRateAmount: document.getElementById('invoice-summary__tax-amount'),
+  shippingCostInput: document.getElementById('shipping-cost-input'),
 
   addTableRow(data) {
     const tableRow = document.createElement('tr');
@@ -168,6 +174,11 @@ const controller = {
     model.updateTaxRate(Number(e.target.value));
     view.updateTaxRate((model.invoiceSubtotal * model.invoiceTaxRate) / 100);
   },
+
+  handleShippingCostChange(e) {
+    const shippingCost = Number(e.target.value);
+    model.updateShippingCost(shippingCost);
+  },
 };
 
 view.addItemBtn.addEventListener(
@@ -183,4 +194,9 @@ view.invoiceItemsBody.addEventListener(
 view.taxRateInput.addEventListener(
   'change',
   controller.handleTaxRateChange.bind(controller)
+);
+
+view.shippingCostInput.addEventListener(
+  'change',
+  controller.handleShippingCostChange
 );
