@@ -7,9 +7,13 @@ const model = {
   invoiceTotal: 0,
 
   saveItem(data) {
-    const id = Math.random().toString().substring(2);
-    console.log({ ...data, id });
-    this.invoiceItems.push({ ...data, id });
+    this.invoiceItems.push(data);
+  },
+
+  removeItem(id) {
+    const index = this.invoiceItems.findIndex((item) => item.id === id);
+    console.log(index);
+    this.invoiceItems.splice(index, 1);
   },
 };
 
@@ -23,6 +27,8 @@ const view = {
 
   addTableRow(data) {
     const tableRow = document.createElement('tr');
+    tableRow.dataset.id = data.id;
+    tableRow.id = data.id;
     tableRow.classList.add('invoice-item__row');
     tableRow.innerHTML = `
       <td class="invoice-item__description">
@@ -38,17 +44,21 @@ const view = {
         ${utils.formatNumberDisplay(data.quantity * data.price, 2)}
       </td>
       <td class="invoice-item__edit">
-        <button class="invoice-item__button">
+        <button id="edit-item-btn" class="invoice-item__button">
           <i class="fa-regular fa-pen-to-square"></i>
         </button>
       </td>
       <td class="invoice-item__remove">
-        <button class="invoice-item__button">
+        <button id="remove-item-btn" class="invoice-item__button">
           <i class="fa-regular fa-square-minus"></i>
         </button>
       </td>
     `;
     this.formRowEl.insertAdjacentElement('beforebegin', tableRow);
+  },
+
+  deleteTableRow(id) {
+    document.getElementById(id).remove();
   },
 
   clearForm() {
@@ -86,6 +96,7 @@ const utils = {
 const controller = {
   getItemData() {
     const data = {
+      id: Math.random().toString().substring(2),
       description: view.itemNameEl.value.trim(),
       quantity: Number.parseInt(view.itemQtyEl.value),
       price: Number.parseFloat(view.itemPriceEl.value).toFixed(2),
@@ -111,9 +122,23 @@ const controller = {
     view.addTableRow(itemData);
     view.clearForm();
   },
+
+  handleDeleteItem(e) {
+    if (!e.target.closest('#remove-item-btn')) {
+      return;
+    }
+
+    const tableRow = e.target.closest('.invoice-item__row');
+    const id = tableRow.dataset.id;
+
+    model.removeItem(id);
+    view.deleteTableRow(id);
+  },
 };
 
 view.addItemBtn.addEventListener(
   'click',
   controller.handleAddItem.bind(controller)
 );
+
+view.invoiceItemsBody.addEventListener('click', controller.handleDeleteItem);
