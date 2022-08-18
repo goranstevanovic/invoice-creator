@@ -235,6 +235,14 @@ body {
   width: 50%;
 }
 
+.invoice-summary__tax-rate {
+  background: transparent;
+  border: none;
+  margin-left: 0.5em;
+  text-align: right;
+  width: 4.5em;
+}
+
 .invoice-summary__amount {
   font-weight: 900;
   text-align: right;

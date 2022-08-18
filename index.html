@@ -169,8 +169,24 @@ Country
             </td>
           </tr>
           <tr>
-            <td class="invoice-summary__description">Tax <span>10%</span></td>
-            <td class="invoice-summary__amount">2,010.00</td>
+            <td class="invoice-summary__description">
+              Tax
+              <input
+                id="tax-rate-input"
+                class="invoice-summary__tax-rate editable editable--dark"
+                type="number"
+                step="0.01"
+                min="0"
+                max="100"
+                value="0"
+              />%
+            </td>
+            <td
+              id="invoice-summary__tax-amount"
+              class="invoice-summary__amount"
+            >
+              2,010.00
+            </td>
           </tr>
           <tr>
             <td class="invoice-summary__description">Shipping</td>
