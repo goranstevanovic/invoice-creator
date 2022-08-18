@@ -15,6 +15,10 @@ const model = {
     console.log(index);
     this.invoiceItems.splice(index, 1);
   },
+
+  updateSubtotal(amount) {
+    this.invoiceSubtotal += amount;
+  },
 };
 
 const view = {
@@ -41,7 +45,7 @@ const view = {
         ${utils.formatNumberDisplay(data.price, 2)}
       </td>
       <td class="invoice-item__amount">
-        ${utils.formatNumberDisplay(data.quantity * data.price, 2)}
+        ${utils.formatNumberDisplay(data.amount, 2)}
       </td>
       <td class="invoice-item__edit">
         <button id="edit-item-btn" class="invoice-item__button">
@@ -59,6 +63,11 @@ const view = {
 
   deleteTableRow(id) {
     document.getElementById(id).remove();
+  },
+
+  updateSubtotal(amount) {
+    document.getElementById('invoice-summary__subtotal').textContent =
+      utils.formatNumberDisplay(amount);
   },
 
   clearForm() {
@@ -82,7 +91,7 @@ const utils = {
     }
   },
 
-  formatNumberDisplay(number, decimals) {
+  formatNumberDisplay(number, decimals = 2) {
     const locale = this.getNavigatorLanguage();
     const options = {
       style: 'decimal',
@@ -99,8 +108,12 @@ const controller = {
       id: Math.random().toString().substring(2),
       description: view.itemNameEl.value.trim(),
       quantity: Number.parseInt(view.itemQtyEl.value),
-      price: Number.parseFloat(view.itemPriceEl.value).toFixed(2),
+      price: Number.parseFloat(view.itemPriceEl.value),
     };
+
+    data.amount = data.quantity * data.price;
+
+    console.log(data);
 
     return data;
   },
@@ -119,7 +132,9 @@ const controller = {
     }
 
     model.saveItem(itemData);
+    model.updateSubtotal(itemData.quantity * itemData.price);
     view.addTableRow(itemData);
+    view.updateSubtotal(model.invoiceSubtotal);
     view.clearForm();
   },
 
@@ -131,8 +146,12 @@ const controller = {
     const tableRow = e.target.closest('.invoice-item__row');
     const id = tableRow.dataset.id;
 
+    const selectedItem = model.invoiceItems.find((item) => item.id === id);
+
     model.removeItem(id);
     view.deleteTableRow(id);
+    model.updateSubtotal(-selectedItem.amount);
+    view.updateSubtotal(model.invoiceSubtotal);
   },
 };
 
