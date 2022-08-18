@@ -16,6 +16,10 @@ const model = {
     this.invoiceItems.splice(index, 1);
   },
 
+  updateTaxRate(rate) {
+    this.invoiceTaxRate = rate;
+  },
+
   updateSubtotal(amount) {
     this.invoiceSubtotal += amount;
   },
@@ -28,6 +32,8 @@ const view = {
   itemPriceEl: document.getElementById('invoice-item__price'),
   formRowEl: document.getElementById('form-row'),
   addItemBtn: document.getElementById('add-item-btn'),
+  taxRateInput: document.getElementById('tax-rate-input'),
+  taxRateAmount: document.getElementById('invoice-summary__tax-amount'),
 
   addTableRow(data) {
     const tableRow = document.createElement('tr');
@@ -63,6 +69,10 @@ const view = {
 
   deleteTableRow(id) {
     document.getElementById(id).remove();
+  },
+
+  updateTaxRate(amount) {
+    this.taxRateAmount.textContent = utils.formatNumberDisplay(amount);
   },
 
   updateSubtotal(amount) {
@@ -153,6 +163,11 @@ const controller = {
     model.updateSubtotal(-selectedItem.amount);
     view.updateSubtotal(model.invoiceSubtotal);
   },
+
+  handleTaxRateChange(e) {
+    model.updateTaxRate(Number(e.target.value));
+    view.updateTaxRate((model.invoiceSubtotal * model.invoiceTaxRate) / 100);
+  },
 };
 
 view.addItemBtn.addEventListener(
@@ -160,4 +175,12 @@ view.addItemBtn.addEventListener(
   controller.handleAddItem.bind(controller)
 );
 
-view.invoiceItemsBody.addEventListener('click', controller.handleDeleteItem);
+view.invoiceItemsBody.addEventListener(
+  'click',
+  controller.handleDeleteItem.bind(controller)
+);
+
+view.taxRateInput.addEventListener(
+  'change',
+  controller.handleTaxRateChange.bind(controller)
+);
