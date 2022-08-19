@@ -43,10 +43,25 @@ const view = {
   itemPriceEl: document.getElementById('invoice-item__price'),
   formRowEl: document.getElementById('form-row'),
   addItemBtn: document.getElementById('add-item-btn'),
+  subtotalInvoiceAmount: document.getElementById('invoice-summary__subtotal'),
   taxRateInput: document.getElementById('tax-rate-input'),
   taxRateAmount: document.getElementById('invoice-summary__tax-amount'),
   shippingCostInput: document.getElementById('shipping-cost-input'),
   totalInvoiceAmount: document.getElementById('invoice-summary__total-amount'),
+
+  setUpInitialValues() {
+    this.subtotalInvoiceAmount.textContent = utils.formatNumberDisplay(
+      model.invoiceSubtotal
+    );
+    this.taxRateInput.value = utils.formatNumberDisplay(model.invoiceTaxRate);
+    this.taxRateAmount.textContent = utils.formatNumberDisplay(0);
+    this.shippingCostInput.value = utils.formatNumberDisplay(
+      model.invoiceShippingCost
+    );
+    this.totalInvoiceAmount.textContent = utils.formatNumberDisplay(
+      model.invoiceTotal
+    );
+  },
 
   addTableRow(data) {
     const tableRow = document.createElement('tr');
@@ -84,8 +99,7 @@ const view = {
   },
 
   updateSubtotal(amount) {
-    document.getElementById('invoice-summary__subtotal').textContent =
-      utils.formatNumberDisplay(amount);
+    this.subtotalInvoiceAmount.textContent = utils.formatNumberDisplay(amount);
   },
 
   updateTotal(amount) {
@@ -194,6 +208,8 @@ const controller = {
     view.updateTotal(model.invoiceTotal);
   },
 };
+
+view.setUpInitialValues();
 
 view.addItemBtn.addEventListener(
   'click',
