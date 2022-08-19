@@ -183,7 +183,7 @@ body {
 
 .invoice-item__description {
   text-align: left;
-  width: 46%;
+  width: 48%;
 }
 
 .invoice-item__quantity {
@@ -200,11 +200,6 @@ body {
   font-weight: 700;
   text-align: right;
   width: 20%;
-}
-
-.invoice-item__edit {
-  text-align: center;
-  width: 2%;
 }
 
 .invoice-item__remove {

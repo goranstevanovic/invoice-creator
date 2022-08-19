@@ -66,11 +66,6 @@ const view = {
       <td class="invoice-item__amount">
         ${utils.formatNumberDisplay(data.amount, 2)}
       </td>
-      <td class="invoice-item__edit">
-        <button id="edit-item-btn" class="invoice-item__button">
-          <i class="fa-regular fa-pen-to-square"></i>
-        </button>
-      </td>
       <td class="invoice-item__remove">
         <button id="remove-item-btn" class="invoice-item__button">
           <i class="fa-regular fa-square-minus"></i>
