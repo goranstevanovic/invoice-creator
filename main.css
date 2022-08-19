@@ -175,10 +175,27 @@ body {
 
 .invoice-item__input {
   background: transparent;
-  border-bottom: 1px dashed var(--dark);
   border: none;
   text-align: center;
   width: 100%;
+}
+
+.invoice-item__input--description {
+  left: -0.1em;
+  position: relative;
+  text-align: left;
+}
+
+.invoice-item__input--quantity {
+  position: relative;
+  right: -0.5em;
+  text-align: center;
+}
+
+.invoice-item__input--price {
+  position: relative;
+  right: -1em;
+  text-align: right;
 }
 
 .invoice-item__description {
