@@ -16,6 +16,7 @@
     />
     <link rel="stylesheet" href="normalize.css" />
     <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="print.css" media="print" />
     <script src="app.js" defer></script>
     <title>Invoice Creator</title>
   </head>
@@ -101,7 +102,7 @@ Country
           </tr>
         </thead>
         <tbody id="invoice-items__body" class="invoice-items__body">
-          <tr id="form-row">
+          <tr id="form-row" class="form-row">
             <td class="invoice-item__description">
               <input
                 id="invoice-item__description"
