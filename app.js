@@ -98,6 +98,11 @@ const view = {
     this.taxRateAmount.textContent = utils.formatNumberDisplay(amount);
   },
 
+  updateTaxAmount() {
+    const taxAmount = (model.invoiceSubtotal * model.invoiceTaxRate) / 100;
+    this.taxRateAmount.textContent = utils.formatNumberDisplay(taxAmount);
+  },
+
   updateSubtotal(amount) {
     this.subtotalInvoiceAmount.textContent = utils.formatNumberDisplay(amount);
   },
@@ -172,6 +177,7 @@ const controller = {
     model.updateTotal();
     view.addTableRow(itemData);
     view.updateSubtotal(model.invoiceSubtotal);
+    view.updateTaxAmount();
     view.updateTotal(model.invoiceTotal);
     view.clearForm();
   },
@@ -187,10 +193,11 @@ const controller = {
     const selectedItem = model.invoiceItems.find((item) => item.id === id);
 
     model.removeItem(id);
-    view.deleteTableRow(id);
     model.updateSubtotal(-selectedItem.amount);
     model.updateTotal();
+    view.deleteTableRow(id);
     view.updateSubtotal(model.invoiceSubtotal);
+    view.updateTaxAmount();
     view.updateTotal(model.invoiceTotal);
   },
 
