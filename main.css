@@ -37,10 +37,11 @@ body {
   align-items: center;
   display: grid;
   gap: 2rem 4rem;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   grid-template-areas:
-    'title number dates dates'
-    'address-from address-from address-to address-to';
+    'title _'
+    'number dates'
+    'address-from address-to';
 }
 
 .invoice-head {
@@ -305,4 +306,33 @@ body {
 
 .editable--light {
   border-color: #fff;
+}
+
+@media screen and (max-width: 42em) {
+  .invoice-head__number {
+    font-size: 1.25rem;
+  }
+
+  .invoice-body {
+    padding: 0.5em;
+  }
+
+  .invoice-items th,
+  .invoice-items td,
+  .invoice-summary th,
+  .invoice-summary td {
+    padding: 0.5rem;
+  }
+
+  .invoice-items th {
+    font-size: 0.75em;
+  }
+
+  .invoice-summary {
+    width: 100%;
+  }
+
+  .invoice-summary__shipping-cost {
+    margin-right: 0;
+  }
 }
