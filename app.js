@@ -48,6 +48,7 @@ const view = {
   taxRateAmount: document.getElementById('invoice-summary__tax-amount'),
   shippingCostInput: document.getElementById('shipping-cost-input'),
   totalInvoiceAmount: document.getElementById('invoice-summary__total-amount'),
+  printInvoiceBtn: document.getElementById('print-invoice-btn'),
 
   setUpInitialValues() {
     this.subtotalInvoiceAmount.textContent = utils.formatNumberDisplay(
@@ -214,6 +215,11 @@ const controller = {
     model.updateTotal();
     view.updateTotal(model.invoiceTotal);
   },
+
+  handlePrintInvoice() {
+    console.log('printing');
+    print();
+  },
 };
 
 view.setUpInitialValues();
@@ -237,3 +243,5 @@ view.shippingCostInput.addEventListener(
   'change',
   controller.handleShippingCostChange.bind(controller)
 );
+
+view.printInvoiceBtn.addEventListener('click', controller.handlePrintInvoice);

@@ -277,6 +277,23 @@ body {
   line-height: 1em;
 }
 
+.print-invoice-btn {
+  background-color: var(--gray-light);
+  border: 2px solid transparent;
+  cursor: pointer;
+  display: block;
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  margin-left: auto;
+  margin-top: 1em;
+  padding: 1em 1.5em;
+  text-transform: uppercase;
+}
+
+.print-invoice-btn:hover {
+  border-bottom-color: var(--dark);
+}
+
 .editable {
   border-bottom-style: dashed;
   border-bottom-width: 1px;
